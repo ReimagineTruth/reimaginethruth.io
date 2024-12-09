@@ -1,0 +1,359 @@
+‎ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Settings - Reimagine Truth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .button-click {
+            animation: buttonClick 0.2s ease-in-out;
+        }
+
+        @keyframes buttonClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 10s linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .light-mode {
+            background-color: #ffffff;
+            color: #1a202c;
+        }
+        .light-mode .bg-gray-800 {
+            background-color: #f7fafc;
+        }
+        .light-mode .text-gray-200 {
+            color: #1a202c;
+        }
+        .light-mode .text-gray-400 {
+            color: #4a5568;
+        }
+        .light-mode .bg-gray-900 {
+            background-color: #ffffff;
+        }
+        .dark-mode {
+            background-color: #1a202c;
+            color: #cbd5e0;
+        }
+        .dark-mode .bg-gray-800 {
+            background-color: #2d3748;
+        }
+        .dark-mode .text-gray-200 {
+            color: #cbd5e0;
+        }
+        .dark-mode .text-gray-400 {
+            color: #a0aec0;
+        }
+        .dark-mode .bg-gray-900 {
+            background-color: #1a202c;
+        }
+    </style>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, TwitterAuthProvider } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "your-api-key",
+            authDomain: "your-auth-domain",
+            projectId: "your-project-id",
+            storageBucket: "your-storage-bucket",
+            messagingSenderId: "your-sender-id",
+            appId: "your-app-id",
+            measurementId: "your-measurement-id"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            const userElement = document.getElementById("userStatus");
+            const logoutButton = document.getElementById("logoutButton");
+
+            if (user) {
+                userElement.textContent = `Logged in as: ${user.email}`;
+                logoutButton.style.display = "block";
+            } else {
+                userElement.textContent = "Not logged in";
+                logoutButton.style.display = "none";
+            }
+        });
+
+        function logout() {
+            signOut(auth).then(() => {
+                console.log("User signed out");
+                window.location.reload();
+            }).catch((error) => {
+                console.error("Logout error: ", error);
+            });
+        }
+
+        function signInWithGoogle() {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider).catch((error) => {
+                console.error("Google sign-in error: ", error);
+            });
+        }
+
+        function signInWithFacebook() {
+            const provider = new FacebookAuthProvider();
+            signInWithPopup(auth, provider).catch((error) => {
+                console.error("Facebook sign-in error: ", error);
+            });
+        }
+
+        function signInWithTwitter() {
+            const provider = new TwitterAuthProvider();
+            signInWithPopup(auth, provider).catch((error) => {
+                console.error("Twitter sign-in error: ", error);
+            });
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const themeToggleButton = document.getElementById('theme-toggle');
+            const profilePicInput = document.getElementById('profilePicInput');
+            const profilePic = document.getElementById('profilePic');
+            const passwordInput = document.getElementById('new-password');
+            const passwordStrength = document.getElementById('password-strength');
+
+            menuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            themeToggleButton.addEventListener('click', function() {
+                document.body.classList.toggle('light-mode');
+                document.body.classList.toggle('dark-mode');
+                themeToggleButton.innerHTML = document.body.classList.contains('light-mode') ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+                document.getElementById('header-title').classList.toggle('text-white');
+                document.getElementById('header-title').classList.toggle('text-gray-900');
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.toggle('text-gray-200');
+                    link.classList.toggle('text-gray-900');
+                });
+            });
+
+            profilePicInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profilePic.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            passwordInput.addEventListener('input', function() {
+                const strength = getPasswordStrength(passwordInput.value);
+                passwordStrength.textContent = `Strength: ${strength}`;
+                passwordStrength.className = `text-sm ${getPasswordStrengthClass(strength)}`;
+            });
+        });
+
+        function getPasswordStrength(password) {
+            let strength = 'Weak';
+            if (password.length > 8) strength = 'Medium';
+            if (password.length > 12 && /[A-Z]/.test(password) && /[0-9]/.test(password)) strength = 'Strong';
+            return strength;
+        }
+
+        function getPasswordStrengthClass(strength) {
+            switch (strength) {
+                case 'Medium': return 'text-yellow-500';
+                case 'Strong': return 'text-green-500';
+                default: return 'text-red-500';
+            }
+        }
+
+        function showLoading(button) {
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            button.disabled = true;
+        }
+
+        function hideLoading(button, originalText) {
+            button.innerHTML = originalText;
+            button.disabled = false;
+        }
+
+        function updateProfile() {
+            const button = document.getElementById('updateProfileButton');
+            showLoading(button);
+            setTimeout(() => {
+                alert('Profile updated successfully!');
+                hideLoading(button, 'Update Profile');
+            }, 2000);
+        }
+
+        function changePassword() {
+            const button = document.getElementById('changePasswordButton');
+            showLoading(button);
+            setTimeout(() => {
+                alert('Password changed successfully!');
+                hideLoading(button, 'Change Password');
+            }, 2000);
+        }
+
+        // Christmas Effect
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.animationDuration = Math.random() * 3 + 7 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        setInterval(createSnowflake, 200);
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-200 relative dark-mode">
+    <header class="bg-gray-800 p-4 text-center relative">
+        <h1 class="text-3xl font-bold text-white" id="header-title">Settings</h1>
+        <button class="p-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 absolute top-4 right-4 transition-transform transform hover:scale-110" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+    <!-- Mobile Navigation Button -->
+    <button aria-label="Toggle Menu" class="md:hidden text-gray-200 p-4 absolute top-4 left-4" id="menu-button">
+        <span class="fas fa-bars"></span>
+    </button>
+    <!-- Mobile Navigation -->
+    <nav class="bg-gray-900 p-4 md:hidden hidden" id="mobile-menu">
+        <ul class="flex flex-col space-y-4 text-lg">
+            <li><a href="home.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-home mr-2"></i>Home</a></li>
+            <li><a href="my-assets.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-wallet mr-2"></i>My Assets</a></li>
+            <li><a href="about.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-info-circle mr-2"></i>About</a></li>
+            <li><a href="community.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-users mr-2"></i>Community</a></li>
+            <li><a href="news.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-newspaper mr-2"></i>News</a></li>
+            <li><a href="settings.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-cog mr-2"></i>Settings</a></li>
+        </ul>
+    </nav>
+    <!-- Desktop Navigation -->
+    <nav class="bg-gray-900 p-4 hidden md:block">
+        <ul class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 text-lg">
+            <li><a href="home.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-home mr-2"></i>Home</a></li>
+            <li><a href="my-assets.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-wallet mr-2"></i>My Assets</a></li>
+            <li><a href="about.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-info-circle mr-2"></i>About</a></li>
+            <li><a href="community.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-users mr-2"></i>Community</a></li>
+            <li><a href="news.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-newspaper mr-2"></i>News</a></li>
+            <li><a href="settings.html" class="nav-link flex items-center text-gray-200"><i class="fas fa-cog mr-2"></i>Settings</a></li>
+        </ul>
+    </nav>
+    <main class="p-4 fade-in">
+        <div>
+            <p class="text-lg" id="userStatus"></p>
+            <button class="mt-4 bg-red-600 text-white py-2 px-4 rounded hidden transition-transform transform hover:scale-105" id="logoutButton" onclick="logout()">Logout</button>
+        </div>
+        <!-- Sign-in Providers Section -->
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold">Sign-in Providers</h2>
+            <div class="mt-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <button class="bg-blue-600 text-white py-2 px-4 rounded transition-transform transform hover:scale-105" onclick="signInWithGoogle()">
+                    <i class="fab fa-google mr-2"></i> Sign in with Google
+                </button>
+                <button class="bg-blue-800 text-white py-2 px-4 rounded transition-transform transform hover:scale-105" onclick="signInWithFacebook()">
+                    <i class="fab fa-facebook mr-2"></i> Sign in with Facebook
+                </button>
+                <button class="bg-blue-400 text-white py-2 px-4 rounded transition-transform transform hover:scale-105" onclick="signInWithTwitter()">
+                    <i class="fab fa-twitter mr-2"></i> Sign in with Twitter
+                </button>
+            </div>
+        </section>
+        <!-- User Profile Section -->
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold">User Profile</h2>
+            <div class="mt-4 flex flex-col items-center">
+                <img id="profilePic" alt="User profile picture placeholder" class="w-24 h-24 rounded-full mb-4" src="https://storage.googleapis.com/a1aa/image/JpMoUgluUOIfJqeBNpFqgrIn9eiGvOAukDLC89aMZcJsLXxnA.jpg" width="96" height="96"/>
+                <input type="file" id="profilePicInput" class="hidden"/>
+                <button class="bg-blue-600 text-white py-2 px-4 rounded mb-4 transition-transform transform hover:scale-105" onclick="document.getElementById('profilePicInput').click()">Upload Profile Picture</button>
+                <label class="block text-sm" for="name">Name</label>
+                <input type="text" id="name" class="w-full p-2 mt-1 bg-gray-800 text-white rounded" placeholder="Your Name">
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm" for="email">Email</label>
+                <input type="email" id="email" class="w-full p-2 mt-1 bg-gray-800 text-white rounded" placeholder="Your Email">
+            </div>
+            <button id="updateProfileButton" class="mt-4 bg-blue-600 text-white py-2 px-4 rounded transition-transform transform hover:scale-105" onclick="updateProfile()">Update Profile</button>
+        </section>
+        <!-- Password Management Section -->
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold">Password Management</h2>
+            <div class="mt-4">
+                <label class="block text-sm" for="current-password">Current Password</label>
+                <input type="password" id="current-password" class="w-full p-2 mt-1 bg-gray-800 text-white rounded" placeholder="Current Password">
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm" for="new-password">New Password</label>
+                <input type="password" id="new-password" class="w-full p-2 mt-1 bg-gray-800 text-white rounded" placeholder="New Password">
+                <p id="password-strength" class="text-sm text-red-500 mt-1">Strength: Weak</p>
+            </div>
+            <button id="changePasswordButton" class="mt-4 bg-blue-600 text-white py-2 px-4 rounded transition-transform transform hover:scale-105" onclick="changePassword()">Change Password</button>
+        </section>
+    </main>
+    <footer class="bg-gray-800 p-4 text-center text-gray-200 mt-8">
+        <p>&copy; 2023 Reimagine Truth. All rights reserved.</p>
+        <div class="mt-4">
+            <a href="privacy.html" class="text-gray-400 hover:text-gray-200 mx-2">Privacy Policy</a>
+            <a href="terms.html" class="text-gray-400 hover:text-gray-200 mx-2">Terms of Service</a>
+            <a href="contact.html" class="text-gray-400 hover:text-gray-200 mx-2">Contact Us</a>
+        </div>
+        <div class="mt-4">
+            <a href="https://facebook.com" class="text-gray-400 hover:text-gray-200 mx-2"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com" class="text-gray-400 hover:text-gray-200 mx-2"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com" class="text-gray-400 hover:text-gray-200 mx-2"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com" class="text-gray-400 hover:text-gray-200 mx-2"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('bg-gray-900');
+            document.body.classList.toggle('bg-white');
+            document.body.classList.toggle('text-gray-200');
+            document.body.classList.toggle('text-gray-900');
+            document.body.classList.toggle('light-mode');
+            themeToggle.innerHTML
