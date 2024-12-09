@@ -1,0 +1,244 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>News Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <script>
+        // Tailwind CSS configuration for dark mode
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        .reaction-btn {
+            position: relative;
+            display: inline-block;
+        }
+        .reaction-btn .reaction-icons {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 8px;
+            z-index: 10;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .reaction-btn:hover .reaction-icons {
+            display: flex;
+        }
+        .reaction-icons span {
+            margin: 0 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-size: 1.5rem;
+        }
+        .reaction-icons span:hover {
+            transform: scale(1.2);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-roboto dark:bg-gray-900 dark:text-gray-100">
+    <header class="bg-gray-800 p-4 text-center relative">
+        <h1 class="text-3xl font-bold text-white">Reimagine Truth</h1>
+        <button class="absolute top-4 right-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded" id="darkModeToggle">
+            <i class="fas fa-moon dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:inline"></i>
+        </button>
+    </header>
+
+    <!-- Desktop Navigation -->
+    <nav class="bg-gray-900 p-4 hidden md:block">
+        <ul class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 text-lg">
+            <li><a href="home.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-home mr-2"></i>Home</a></li>
+            <li><a href="my-assets.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-wallet mr-2"></i>My Assets</a></li>
+            <li><a href="about.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-info-circle mr-2"></i>About</a></li>
+            <li><a href="community.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-users mr-2"></i>Community</a></li>
+            <li><a href="news.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-newspaper mr-2"></i>News</a></li>
+            <li><a href="settings.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-cog mr-2"></i>Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <button class="md:hidden text-gray-200 p-4 absolute top-4 left-4" id="menu-button" aria-label="Toggle Menu">
+        <span class="fas fa-bars"></span>
+    </button>
+
+    <nav class="bg-gray-900 p-4 md:hidden" id="mobile-menu" style="display: none;">
+        <ul class="flex flex-col space-y-4 text-lg">
+            <li><a href="home.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-home mr-2"></i>Home</a></li>
+            <li><a href="my-assets.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-wallet mr-2"></i>My Assets</a></li>
+            <li><a href="about.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-info-circle mr-2"></i>About</a></li>
+            <li><a href="community.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-users mr-2"></i>Community</a></li>
+            <li><a href="news.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-newspaper mr-2"></i>News</a></li>
+            <li><a href="settings.html" class="nav-link flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"><i class="fas fa-cog mr-2"></i>Settings</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mx-auto p-6">
+        <!-- Blog Posting Form -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+            <h3 class="text-xl font-semibold mb-4">Post a News Update</h3>
+            <form id="blogForm">
+                <div class="mb-4">
+                    <label class="block text-gray-700 dark:text-gray-300 font-medium" for="title">Title</label>
+                    <input class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded mt-1 focus:ring focus:ring-blue-300 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100" id="title" name="title" placeholder="Enter title" required="" type="text"/>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 dark:text-gray-300 font-medium" for="content">Content</label>
+                    <textarea class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded mt-1 focus:ring focus:ring-blue-300 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100" id="content" name="content" placeholder="Write your content here..." required="" rows="5"></textarea>
+                </div>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300" type="submit">Post</button>
+            </form>
+        </div>
+        <!-- Blog List -->
+        <div class="space-y-6" id="blogPosts">
+            <!-- Blog posts will be dynamically added here -->
+        </div>
+    </div>
+    <footer class="bg-gray-800 p-4 text-center">
+        <p class="text-gray-300 dark:text-gray-400">© 2024 Reimagine Truth. All rights reserved.</p>
+    </footer>
+    <script>
+        const blogForm = document.getElementById('blogForm');
+        const blogPosts = document.getElementById('blogPosts');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Handle form submission
+        blogForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+
+            // Add the new blog post dynamically
+            const newPost = document.createElement('div');
+            newPost.className = 'bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md';
+            newPost.innerHTML = `
+                <div class="flex items-start space-x-4">
+                    <img src="https://i.ibb.co/p30Q5fs/Leonardo-Kino-XL-A-sharplydressed-intenselooking-male-characte-3.jpg" alt="Profile picture of a sharply dressed, intense-looking male character" class="w-12 h-12 rounded-full">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">${title}</h3>
+                        <p class="text-gray-700 dark:text-gray-300">${content}</p>
+                        <div class="flex items-center space-x-4 mt-4">
+                            <div class="reaction-btn">
+                                <button class="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-300">
+                                    React
+                                </button>
+                                <div class="reaction-icons">
+                                    <span title="Like">👍</span>
+                                    <span title="Love">❤️</span>
+                                    <span title="Haha">😂</span>
+                                    <span title="Wow">😮</span>
+                                    <span title="Sad">😢</span>
+                                    <span title="Angry">😡</span>
+                                </div>
+                            </div>
+                            <div class="text-gray-600 dark:text-gray-400">
+                                <span class="react-count">0</span> reactions
+                            </div>
+                            <div class="text-gray-600 dark:text-gray-400">
+                                <span class="recommend-count">0</span> people recommend this
+                            </div>
+                        </div>
+                        <!-- Comment Section -->
+                        <div class="mt-6">
+                            <h4 class="text-lg font-semibold mb-2">Comments</h4>
+                            <div class="space-y-4" id="comments"></div>
+                            <form class="mt-4" id="commentForm">
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 dark:text-gray-300 font-medium" for="comment">Add a comment</label>
+                                    <textarea class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded mt-1 focus:ring focus:ring-blue-300 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100" id="comment" name="comment" placeholder="Write your comment here..." required rows="3"></textarea>
+                                </div>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300" type="submit">Comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+            blogPosts.prepend(newPost);
+
+            // Clear the form
+            blogForm.reset();
+        });
+
+        // Handle dark mode toggle
+        darkModeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Handle menu toggle
+        menuButton.addEventListener('click', () => {
+            mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Handle reaction button click
+        document.addEventListener('click', (event) => {
+            if (event.target.closest('.reaction-icons span')) {
+                const reaction = event.target.title;
+                const reactionBtn = event.target.closest('.reaction-btn').querySelector('button');
+                const reactionIcon = event.target.outerHTML;
+                const reactCount = event.target.closest('.reaction-btn').nextElementSibling.querySelector('.react-count');
+                const recommendCount = event.target.closest('.reaction-btn').nextElementSibling.nextElementSibling.querySelector('.recommend-count');
+
+                reactionBtn.innerHTML = `${reactionIcon} ${reaction}`;
+                reactCount.textContent = parseInt(reactCount.textContent) + 1;
+                recommendCount.textContent = parseInt(recommendCount.textContent) + 1;
+            }
+        });
+
+        // Handle comment form submission
+        document.addEventListener('submit', (event) => {
+            if (event.target.id === 'commentForm') {
+                event.preventDefault();
+                const commentText = event.target.comment.value;
+                const commentsContainer = event.target.closest('.mt-6').querySelector('#comments');
+
+                // Add the new comment dynamically
+                const newComment = document.createElement('div');
+                newComment.className = 'bg-gray-100 dark:bg-gray-700 p-4 rounded-lg';
+                newComment.innerHTML = `<p class="text-gray-700 dark:text-gray-300">${commentText}</p>`;
+                commentsContainer.appendChild(newComment);
+
+                // Clear the comment form
+                event.target.reset();
+            }
+        });
+
+        // Smooth scrolling for better user experience
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Auto-hide menu on click outside
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                mobileMenu.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
