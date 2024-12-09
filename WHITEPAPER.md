@@ -132,6 +132,3 @@ Reimagine Truth operates within the bounds of blockchain laws and regulations. P
 ### **Conclusion**
 Reimagine Truth is a pioneering project in the NFT space, combining blockchain transparency, creative innovation, and community-driven engagement. By leveraging the power of Optimism, NFTs, the $RTO token, and virtual experiences, we aim to build a sustainable, decentralized ecosystem where creators, collectors, and enthusiasts can thrive in a transparent and equitable digital landscape.
 
----
-
-This update incorporates your new **Card Types** and **Rarities**. Let me know if you'd like any further changes!
