@@ -1,21 +1,416 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reimagine Truth - Home</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-900 text-white">
-    <header class="bg-gray-800 p-4 text-center">
-        <h1 class="text-3xl font-bold">Home</h1>
-    </header>
-    <main class="p-6">
-        <h2 class="text-xl font-bold">Welcome to Reimagine Truth</h2>
-        <p class="mt-2">Discover the future of transparency and creativity powered by blockchain technology.</p>
-    </main>
-    <footer class="bg-gray-800 p-4 text-center">
-        <a href="index.html" class="text-blue-400">Back to Menu</a>
-    </footer>
-</body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Reimagine Truth - Home
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .slide-in {
+            animation: slideIn 1s ease-in-out;
+        }
+        .button-click {
+            animation: buttonClick 0.2s ease-in-out;
+        }
+        @keyframes buttonClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        .light-mode {
+            background-color: #ffffff;
+            color: #1a202c;
+        }
+        .light-mode .bg-gray-800 {
+            background-color: #f7fafc;
+        }
+        .light-mode .text-gray-200 {
+            color: #1a202c;
+        }
+        .light-mode .text-gray-400 {
+            color: #4a5568;
+        }
+        .light-mode .bg-gray-700 {
+            background-color: #edf2f7;
+        }
+        .light-mode .bg-gray-900 {
+            background-color: #ffffff;
+        }
+        .light-mode .border-gray-700 {
+            border-color: #e2e8f0;
+        }
+        .light-mode .text-blue-500 {
+            color: #3182ce;
+        }
+        .light-mode .hover\:bg-gray-600:hover {
+            background-color: #e2e8f0;
+        }
+        .nav-link {
+            transition: color 0.3s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #63B3ED;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 10s linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        .fade-in-up {
+            animation: fadeInUp 1s ease-in-out;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .bottom-drawer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #2d3748;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            flex-wrap: wrap;
+        }
+        .bottom-drawer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0.5rem;
+        }
+        .bottom-drawer a:hover {
+            color: #63B3ED;
+        }
+  </style>
+ </head>
+ <body class="bg-gray-900 text-gray-200">
+  <header class="bg-gray-800 p-4 text-center relative">
+   <h1 class="text-2xl md:text-3xl font-bold text-white" id="header-title">
+    Reimagine Truth
+   </h1>
+   <div class="absolute top-4 right-4 flex space-x-2">
+    <button class="p-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-110" id="theme-toggle">
+     <i class="fas fa-moon">
+     </i>
+    </button>
+    <button class="p-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-110" id="snow-toggle">
+     <i class="fas fa-snowflake">
+     </i>
+    </button>
+   </div>
+  </header>
+  <!-- Desktop Navigation -->
+  <nav class="bg-gray-900 p-4 hidden md:block">
+   <ul class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 text-lg">
+    <li>
+     <a class="nav-link flex items-center" href="home.html">
+      <i class="fas fa-home mr-2">
+      </i>
+      Home
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="my-assets.html">
+      <i class="fas fa-wallet mr-2">
+      </i>
+      My Assets
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="about.html">
+      <i class="fas fa-info-circle mr-2">
+      </i>
+      About
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="community.html">
+      <i class="fas fa-users mr-2">
+      </i>
+      Community
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="news.html">
+      <i class="fas fa-newspaper mr-2">
+      </i>
+      News
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="settings.html">
+      <i class="fas fa-cog mr-2">
+      </i>
+      Settings
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <!-- Mobile Navigation -->
+  <button aria-label="Toggle Menu" class="md:hidden text-gray-200 p-4 absolute top-4 left-4" id="menu-button">
+   <span class="fas fa-bars">
+   </span>
+  </button>
+  <nav class="bg-gray-900 p-4 md:hidden" id="mobile-menu" style="display: none;">
+   <ul class="flex flex-col space-y-4 text-lg">
+    <li>
+     <a class="nav-link flex items-center" href="home.html">
+      <i class="fas fa-home mr-2">
+      </i>
+      Home
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="my-assets.html">
+      <i class="fas fa-wallet mr-2">
+      </i>
+      My Assets
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="about.html">
+      <i class="fas fa-info-circle mr-2">
+      </i>
+      About
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="community.html">
+      <i class="fas fa-users mr-2">
+      </i>
+      Community
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="news.html">
+      <i class="fas fa-newspaper mr-2">
+      </i>
+      News
+     </a>
+    </li>
+    <li>
+     <a class="nav-link flex items-center" href="settings.html">
+      <i class="fas fa-cog mr-2">
+      </i>
+      Settings
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="p-6 fade-in-up mb-20">
+   <h2 class="text-xl font-bold">
+    Reimagine Truth Overview 🌐
+   </h2>
+   <p class="mt-2">
+    Reimagine Truth is a groundbreaking decentralized project that merges the power of blockchain technology with a vision to reshape how truth, information, and value are perceived in the digital world. At its core, Reimagine Truth aims to leverage NFTs, community-driven governance, and the $RTO token to foster transparency, trust, and participation in a decentralized ecosystem. 🔗
+   </p>
+   <section class="mt-6 fade-in-up">
+    <h3 class="text-lg font-bold">
+     Core Concept 💡
+    </h3>
+    <p class="mt-2">
+     In a world filled with misinformation, Reimagine Truth seeks to provide a platform where truth is valued, celebrated, and represented in unique digital assets. Through the creation of the Truth Seekers Deck—a collection of rare and exclusive NFTs—the project invites individuals to engage in a journey of truth, discovery, and empowerment. 🃏
+    </p>
+    <p class="mt-2">
+     The Truth Seekers Deck NFTs are not just collectibles; they represent membership in a community dedicated to exploring truth, whether through art, collaboration, or collective action. The deck is a tool for individuals to showcase their beliefs, actions, and contributions to the movement, as well as a vehicle for future value creation. 🌍
+    </p>
+   </section>
+   <section class="mt-6 fade-in-up">
+    <h3 class="text-lg font-bold">
+     Key Components of Reimagine Truth 🔑
+    </h3>
+    <ol class="list-decimal list-inside mt-2 space-y-4">
+     <li>
+      <strong>
+       Truth Seekers Deck NFT Collection 🎴
+      </strong>
+      <p>
+       A unique NFT collection designed to offer exclusive and rare digital assets to holders. The deck features a variety of card types and rarity categories, including Common, Rare, Ultra Rare, Secret Rare, Mosaic Rare, Shatterfoil Rare, and Rainbow Rare. These cards represent different aspects of truth and are tied to community-driven governance and future rewards. 🏆
+      </p>
+     </li>
+     <li>
+      <strong>
+       $RTO Token 💰
+      </strong>
+      <p>
+       Native token of the Reimagine Truth ecosystem, called $RTO, is integrated with the NFTs. $RTO tokens will be distributed through airdrops, staking rewards, and community engagement. Token holders can stake $RTO for exclusive rewards, governance rights, and access to unique project features like the VR NFT Museum and special events. 🎟️
+      </p>
+     </li>
+     <li>
+      <strong>
+       Blockchain Platform: Optimism 🚀
+      </strong>
+      <p>
+       Reimagine Truth is built on Optimism, a Layer 2 scaling solution for Ethereum that offers lower transaction fees and faster transaction speeds, making it ideal for NFT minting and token transfers. The project aims to ensure that its decentralized platform remains accessible, cost-effective, and scalable. 💡
+      </p>
+     </li>
+     <li>
+      <strong>
+       Community Engagement 🤝
+      </strong>
+      <p>
+       Community members are the backbone of Reimagine Truth. The project encourages participation through whitelist events, referral programs, and active involvement in the governance process. Holding Truth Seekers NFTs grants access to governance opportunities, where collectors and community members can vote on project developments, partnerships, and more. 🗳️
+      </p>
+     </li>
+     <li>
+      <strong>
+       Staking and Rewards 🌟
+      </strong>
+      <p>
+       NFT holders can stake their Truth Seekers NFTs to earn $RTO tokens and gain early access to new collections and special features within the ecosystem. The project will also feature a loyalty system, rewarding long-term holders with additional $RTO tokens, exclusive NFTs, and other benefits. 🏅
+      </p>
+     </li>
+     <li>
+      <strong>
+       Marketplace Integration 🌍
+      </strong>
+      <p>
+       The Truth Seekers Deck will be available for purchase and trade on major NFT marketplaces such as OpenSea and Zora. The project will also feature an integrated royalty system that ensures creators and holders continue to benefit from the resale of their assets. 💸
+      </p>
+     </li>
+     <li>
+      <strong>
+       VR NFT Museum 🏛️
+      </strong>
+      <p>
+       As part of the project’s future vision, Reimagine Truth aims to create a virtual reality NFT museum where holders of Legendary and Ultra Rare NFTs will have exclusive access. The VR museum will showcase a collection of Truth Seekers NFTs, providing an immersive experience for collectors and showcasing the intersection of art and technology. 🎮
+      </p>
+     </li>
+    </ol>
+   </section>
+   <section class="mt-6 fade-in-up">
+    <h3 class="text-lg font-bold">
+     Goals and Vision 🎯
+    </h3>
+    <p class="mt-2">
+     Promote truth and transparency: In a world overwhelmed by misinformation, Reimagine Truth provides a platform that values authenticity, verified information, and collective wisdom. 💬
+    </p>
+    <p class="mt-2">
+     Build a strong, engaged community: By rewarding early supporters, active community members, and contributors, Reimagine Truth ensures that its vision becomes a reality through collaboration. 🤗
+    </p>
+    <p class="mt-2">
+     Establish a self-sustaining ecosystem: Through the integration of NFTs, $RTO tokens, and a decentralized governance model, the project aims to create a long-term, thriving ecosystem that continues to evolve. 🌱
+    </p>
+   </section>
+   <section class="mt-6 fade-in-up">
+    <h3 class="text-lg font-bold">
+     The Future of Reimagine Truth 🔮
+    </h3>
+    <p class="mt-2 mb-6">
+     The Truth Seekers Deck will continue to grow, expanding with new NFT collections, additional card types, and greater community involvement. Future collaborations with other artists, creators, and communities will bring additional value to Reimagine Truth holders. 🌐
+    </p>
+    <p class="mt-2 mb-20">
+     $RTO token utility will expand, providing new ways to participate in the project’s growth and receive rewards for engagement. 🔄
+    </p>
+   </section>
+  </main>
+  <div class="bottom-drawer">
+   <a href="index.html">
+    <i class="fas fa-home"></i>
+    <span>Back to Home</span>
+   </a>
+   <a href="whitepaper.html">
+    <i class="fas fa-file-alt"></i>
+    <span>Whitepaper</span>
+   </a>
+   <a href="listing.html">
+    <i class="fas fa-list"></i>
+    <span>Listing</span>
+   </a>
+   <a href="wiki.html" onclick="window.location.href='wiki.html'">
+    <i class="fas fa-book"></i>
+    <span>Wiki</span>
+   </a>
+  </div>
+  <script>
+   const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('bg-gray-900');
+            document.body.classList.toggle('bg-white');
+            document.body.classList.toggle('text-gray-200');
+            document.body.classList.toggle('text-gray-900');
+            document.body.classList.toggle('light-mode');
+            themeToggle.innerHTML = document.body.classList.contains('light-mode') ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            document.getElementById('header-title').classList.toggle('text-white');
+            document.getElementById('header-title').classList.toggle('text-gray-900');
+        });
+
+        // Christmas Effect
+        let snowInterval;
+        const snowToggle = document.getElementById('snow-toggle');
+        snowToggle.addEventListener('click', () => {
+            if (snowInterval) {
+                clearInterval(snowInterval);
+                snowInterval = null;
+                snowToggle.innerHTML = '<i class="fas fa-snowflake"></i>';
+            } else {
+                snowInterval = setInterval(createSnowflake, 200);
+                snowToggle.innerHTML = '<i class="fas fa-snowflake text-blue-500"></i>';
+            }
+        });
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.animationDuration = Math.random() * 3 + 7 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuButton.addEventListener('click', () => {
+            mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
+        });
+  </script>
+ </body>
 </html>
