@@ -1,0 +1,316 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Reimagine Truth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .slide-in {
+            animation: slideIn 1s ease-in-out;
+        }
+        .button-click {
+            animation: buttonClick 0.2s ease-in-out;
+        }
+        @keyframes buttonClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        .light-mode {
+            background-color: #ffffff;
+            color: #1a202c;
+        }
+        .light-mode .bg-gray-800 {
+            background-color: #f7fafc;
+        }
+        .light-mode .text-gray-200 {
+            color: #1a202c;
+        }
+        .light-mode .text-gray-400 {
+            color: #4a5568;
+        }
+        .light-mode .bg-gray-700 {
+            background-color: #edf2f7;
+        }
+        .light-mode .bg-gray-900 {
+            background-color: #ffffff;
+        }
+        .light-mode .border-gray-700 {
+            border-color: #e2e8f0;
+        }
+        .light-mode .text-blue-500 {
+            color: #3182ce;
+        }
+        .light-mode .hover\:bg-gray-600:hover {
+            background-color: #e2e8f0;
+        }
+        .nav-link {
+            transition: color 0.3s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #63B3ED;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 10s linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        .theme-transition {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 theme-transition">
+    <header class="bg-gray-800 p-4 text-center relative theme-transition">
+        <h1 class="text-3xl font-bold text-white theme-transition" id="header-title">Reimagine Truth</h1>
+        <p class="text-lg text-gray-400">About Us, White Paper, and Roadmap</p>
+        <button class="p-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 absolute top-4 right-4 transition-transform transform hover:scale-110" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <!-- Desktop Navigation -->
+    <nav class="bg-gray-900 p-4 hidden md:block theme-transition">
+        <ul class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 text-lg">
+            <li><a href="home.html" class="nav-link flex items-center"><i class="fas fa-home mr-2"></i>Home</a></li>
+            <li><a href="my-assets.html" class="nav-link flex items-center"><i class="fas fa-wallet mr-2"></i>My Assets</a></li>
+            <li><a href="about.html" class="nav-link flex items-center"><i class="fas fa-info-circle mr-2"></i>About</a></li>
+            <li><a href="community.html" class="nav-link flex items-center"><i class="fas fa-users mr-2"></i>Community</a></li>
+            <li><a href="news.html" class="nav-link flex items-center"><i class="fas fa-newspaper mr-2"></i>News</a></li>
+            <li><a href="settings.html" class="nav-link flex items-center"><i class="fas fa-cog mr-2"></i>Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <button class="md:hidden text-gray-200 p-4 absolute top-4 left-4" id="menu-button" aria-label="Toggle Menu">
+        <span class="fas fa-bars"></span>
+    </button>
+
+    <nav class="bg-gray-900 p-4 md:hidden theme-transition" id="mobile-menu" style="display: none;">
+        <ul class="flex flex-col space-y-4 text-lg">
+            <li><a href="home.html" class="nav-link flex items-center"><i class="fas fa-home mr-2"></i>Home</a></li>
+            <li><a href="my-assets.html" class="nav-link flex items-center"><i class="fas fa-wallet mr-2"></i>My Assets</a></li>
+            <li><a href="about.html" class="nav-link flex items-center"><i class="fas fa-info-circle mr-2"></i>About</a></li>
+            <li><a href="community.html" class="nav-link flex items-center"><i class="fas fa-users mr-2"></i>Community</a></li>
+            <li><a href="news.html" class="nav-link flex items-center"><i class="fas fa-newspaper mr-2"></i>News</a></li>
+            <li><a href="settings.html" class="nav-link flex items-center"><i class="fas fa-cog mr-2"></i>Settings</a></li>
+        </ul>
+    </nav>
+
+    <main class="p-6 theme-transition">
+        <section>
+            <h2 class="text-2xl font-bold section-title">Overview</h2>
+            <p class="mt-2">Reimagine Truth is a blockchain-powered initiative redefining creativity, community engagement, and transparency through NFTs and tokenization. Built on the <strong>Optimism chain</strong>, this project combines cutting-edge blockchain technology, decentralized marketplaces, and virtual reality (VR) experiences to empower artists, collectors, and blockchain enthusiasts alike.</p>
+        </section>
+
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold section-title">Vision</h2>
+            <p class="mt-2">To establish a decentralized ecosystem where truth and transparency inspire creativity, collaboration, and innovation, fostering global connections.</p>
+        </section>
+
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold section-title">Mission</h2>
+            <p class="mt-2">To revolutionize the digital art space by leveraging blockchain technology to empower creators, build community-driven platforms, and offer a seamless, transparent user experience.</p>
+        </section>
+
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold section-title">Core Components</h2>
+            <h3 class="text-xl font-bold mt-4">1. NFTs: The Truth Seekers Deck</h3>
+            <ul class="list-disc ml-6">
+                <li>Themed around honesty, courage, and community.</li>
+                <li>Rarity levels: Common, Rare, Ultra Rare, Secret Rare, Mosaic Rare, Shatterfoil Rare, and Rainbow Rare.</li>
+                <li>Card types include Normal, Effect, Ritual, and more.</li>
+                <li>Utilities: Staking rewards, exclusive event access, and governance rights.</li>
+            </ul>
+
+            <h3 class="text-xl font-bold mt-4">2. $RTO Token</h3>
+            <p>The Reimagine Truth Token ($RTO) fuels the ecosystem with staking, governance, and transactional use cases.</p>
+
+            <h3 class="text-xl font-bold mt-4">3. Virtual NFT Museum</h3>
+            <p>An immersive VR space for showcasing, auctioning, and hosting events around NFTs.</p>
+        </section>
+
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold section-title">Integration with Pi Network</h2>
+            <p class="mt-2">Reimagine Truth integrates with <strong>Pi Network</strong>, bridging blockchain technology with a decentralized global audience. This partnership enhances accessibility and accelerates adoption by connecting communities and ecosystems seamlessly.</p>
+        </section>
+
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold section-title">Revenue Streams</h2>
+            <ul class="list-disc ml-6">
+                <li><strong>NFT Sales and Auctions:</strong> Direct NFT sales, marketplace royalties, and auction commissions.</li>
+                <li><strong>Token Economy:</strong> Staking $RTO for rewards and governance access.</li>
+                <li><strong>VR Museum:</strong> Fees for displaying NFTs and hosting premium events.</li>
+            </ul>
+        </section>
+
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold section-title">Technology Stack</h2>
+            <ul class="list-disc ml-6">
+                <li><strong>Blockchain:</strong> Built on Optimism for low-cost, scalable transactions.</li>
+                <li><strong>Smart Contracts:</strong> Solidity-based contracts for security and efficiency.</li>
+                <li><strong>VR Integration:</strong> Developed using Unity or Unreal Engine.</li>
+            </ul>
+        </section>
+
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold section-title">Roadmap</h2>
+            <h3 class="text-xl font-bold mt-4">Phase 1: Foundation (2024 Q4)</h3>
+            <ul class="list-disc ml-6">
+                <li>Design and finalize NFT collections.</li>
+                <li>Deploy $RTO token smart contract.</li>
+                <li>Launch community channels on Twitter, Telegram, and Discord.</li>
+            </ul>
+
+            <h3 class="text-xl font-bold mt-4">Phase 2: Launch (2025 Q1)</h3>
+            <ul class="list-disc ml-6">
+                <li>Release the first NFT collection.</li>
+                <li>Airdrop $RTO tokens to early adopters.</li>
+                <li>Open the Reimagine Truth VR Museum.</li>
+            </ul>
+
+            <h3 class="text-xl font-bold mt-4">Phase 3: Growth (2025 Q2–Q4)</h3>
+            <ul class="list-disc ml-6">
+                <li>Integrate with Pi Network for cross-platform engagement.</li>
+                <li>Expand VR galleries with new features and artist onboarding.</li>
+            </ul>
+
+            <h3 class="text-xl font-bold mt-4">Phase 4: Expansion (2026 and Beyond)</h3>
+            <ul class="list-disc ml-6">
+                <li>Launch tools for customized NFT minting.</li>
+                <li>Host global events and workshops on blockchain innovation.</li>
+            </ul>
+        </section>
+
+        <section class="mt-8">
+            <h2 class="text-2xl font-bold section-title">Legal Disclaimer</h2>
+            <p class="mt-2">Reimagine Truth adheres to blockchain regulations. Participants should consult financial and legal advisors before engaging in $RTO tokens or NFTs. Blockchain investments carry risks, and past performance does not guarantee future results.</p>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 p-4 text-center theme-transition"> 
+        <p>© 2024 Reimagine Truth. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function() {
+            var mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu.style.display === 'none' || mobileMenu.style.display === '') {
+                mobileMenu.style.display = 'block';
+            } else {
+                mobileMenu.style.display = 'none';
+            }
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('bg-gray-900');
+            document.body.classList.toggle('bg-white');
+            document.body.classList.toggle('text-gray-200');
+            document.body.classList.toggle('text-gray-900');
+            document.body.classList.toggle('light-mode');
+            themeToggle.innerHTML = document.body.classList.contains('light-mode') ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            document.getElementById('header-title').classList.toggle('text-white');
+            document.getElementById('header-title').classList.toggle('text-gray-900');
+        });
+
+        // Christmas Effect
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.animationDuration = Math.random() * 3 + 7 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        setInterval(createSnowflake, 200);
+
+        // Save theme preference in local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-mode', 'bg-white', 'text-gray-900');
+                document.body.classList.remove('bg-gray-900', 'text-gray-200');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                document.getElementById('header-title').classList.add('text-gray-900');
+                document.getElementById('header-title').classList.remove('text-white');
+            }
+        });
+
+        themeToggle.addEventListener('click', () => {
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Voice Command Integration
+        if ('webkitSpeechRecognition' in window) {
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[event.results.length - 1][0].transcript.trim().toLowerCase();
+                if (transcript.includes('home')) {
+                    window.location.href = 'home.html';
+                } else if (transcript.includes('my assets')) {
+                    window.location.href = 'my-assets.html';
+                } else if (transcript.includes('about')) {
+                    window.location.href = 'about.html';
+                } else if (transcript.includes('community')) {
+                    window.location.href = 'community.html';
+                } else if (transcript.includes('news')) {
+                    window.location.href = 'news.html';
+                } else if (transcript.includes('settings')) {
+                    window.location.href = 'settings.html';
+                }
+            };
+
+            recognition.start();
+        }
+
+        // Real-time Data Integration (Mock Example)
+        function fetchRealTimeData() {
+            // Mock data fetching
+            console.log('Fetching real-time data...');
+        }
+
+        setInterval(fetchRealTimeData, 5000);
+    </script>
+</body>
+</html>
