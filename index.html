@@ -1,8 +1,8 @@
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Reimagine Truth - Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reimagine Truth - My Assets</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
@@ -18,7 +18,7 @@
             color: #1a202c;
         }
         .light-mode .bg-gray-800 {
-            background-color: #f7fafc;
+            background-color: #ffffff;
         }
         .light-mode .text-gray-200 {
             color: #1a202c;
@@ -27,7 +27,7 @@
             color: #4a5568;
         }
         .light-mode .bg-gray-700 {
-            background-color: #edf2f7;
+            background-color: #ffffff;
         }
         .light-mode .bg-gray-900 {
             background-color: #ffffff;
@@ -40,6 +40,12 @@
         }
         .light-mode .hover\:bg-gray-600:hover {
             background-color: #e2e8f0;
+        }
+        .light-mode .bg-black {
+            background-color: #ffffff;
+        }
+        .light-mode .text-white {
+            color: #1a202c;
         }
         .nav-link {
             transition: color 0.3s ease-in-out;
@@ -75,7 +81,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #2d3748;
+            background-color: #000000;
             color: white;
             padding: 1rem;
             display: flex;
@@ -143,7 +149,7 @@
         .back-to-top i {
             font-size: 24px;
             color: white;
-            background-color: #2d3748;
+            background-color: #000000;
             padding: 10px;
             border-radius: 50%;
             transition: background-color 0.3s ease;
@@ -151,25 +157,28 @@
         .back-to-top i:hover {
             background-color: #63B3ED;
         }
+        .transition-all {
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
-<body class="bg-black text-gray-200 overflow-hidden">
-    <header class="bg-gray-800 p-4 text-center relative">
-        <h1 class="text-2xl md:text-3xl font-bold text-white" id="header-title">Reimagine Truth</h1>
+<body class="bg-black text-gray-200 overflow-hidden transition-all">
+    <header class="bg-black p-4 text-center relative transition-all">
+        <h1 class="text-2xl md:text-3xl font-bold text-white transition-all" id="header-title">Reimagine Truth</h1>
         <div class="absolute top-4 right-4 flex space-x-2">
-            <button class="p-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-110" id="theme-toggle">
+            <button class="p-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-110" id="theme-toggle" aria-label="Toggle Theme">
                 <i class="fas fa-moon"></i>
             </button>
-            <button class="p-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-110" id="snow-toggle">
+            <button class="p-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-110" id="snow-toggle" aria-label="Toggle Snow">
                 <i class="fas fa-snowflake text-blue-500"></i>
             </button>
         </div>
     </header>
     <!-- Desktop Navigation -->
-    <nav class="bg-black p-4 hidden md:block" id="desktop-menu">
+    <nav class="bg-black p-4 hidden md:block transition-all" id="desktop-menu">
         <ul class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 text-lg">
             <li>
-                <a class="nav-link flex items-center tooltip" href="home.html" data-file="home.html">
+                <a class="nav-link flex items-center tooltip" href="index.html" data-file="home.html">
                     <i class="fas fa-home mr-2"></i>
                     Home
                     <span class="tooltiptext">Go to Home</span>
@@ -216,10 +225,10 @@
     <button aria-label="Toggle Menu" class="md:hidden text-gray-200 p-4 absolute top-4 left-4" id="menu-button">
         <span class="fas fa-bars"></span>
     </button>
-    <nav class="bg-black p-4 md:hidden hidden" id="mobile-menu">
+    <nav class="bg-black p-4 md:hidden hidden transition-all" id="mobile-menu">
         <ul class="flex flex-col space-y-4 text-lg">
             <li>
-                <a class="nav-link flex items-center tooltip" href="home.html" data-file="home.html">
+                <a class="nav-link flex items-center tooltip" href="index.html" data-file="home.html">
                     <i class="fas fa-home mr-2"></i>
                     Home
                     <span class="tooltiptext">Go to Home</span>
@@ -262,9 +271,9 @@
             </li>
         </ul>
     </nav>
-    <div class="fixed bottom-0 left-0 right-0 bg-black text-white" id="footer">
+    <div class="fixed bottom-0 left-0 right-0 bg-black text-white transition-all" id="footer">
         <div class="flex justify-around items-center py-2 sm:py-4">
-            <a href="home.html" class="flex flex-col items-center button-click tooltip" data-file="home.html">
+            <a href="index.html" class="flex flex-col items-center button-click tooltip" data-file="index.html">
                 <i class="fas fa-home text-xl sm:text-2xl"></i>
                 <span class="text-xs sm:text-sm">Home</span>
                 <span class="tooltiptext">Go to Home</span>
@@ -296,10 +305,18 @@
             </a>
         </div>
     </div>
-    <div id="content" class="p-4">
-        <!-- Content will be loaded here -->
+    <div id="content" class="p-4 transition-all">
+        <header class="bg-black p-4 text-center transition-all">
+            <h1 class="text-3xl font-bold transition-all">My Assets</h1>
+        </header>
+        <main class="p-6 transition-all">
+            <p class="mt-2">View and manage your Reimagine Truth NFTs and tokens here.</p>
+        </main>
     </div>
-    <button class="back-to-top" id="back-to-top">
+    <footer class="bg-black p-4 text-center highlight transition-all">
+        <p class="text-gray-400">© 2024 Reimagine Truth. All rights reserved.</p>
+    </footer>
+    <button class="back-to-top transition-all" id="back-to-top">
         <i class="fas fa-arrow-up"></i>
     </button>
     <script>
