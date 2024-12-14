@@ -17,7 +17,7 @@ Welcome to the official repository for **Reimagine Truth** — a visionary NFT p
 ## 🚀 **Launch Details**  
 
 - **Website:** [reimaginetruth.io](https://reimaginetruth.io)  
-- **Launch Date:** January 1, 2025  
+- **Launch Date:** 
 
 ## 🃏 **Truth Seekers Deck**  
 
