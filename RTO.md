@@ -1,4 +1,4 @@
-# 🌐 **Reimagine Truth Organization (RTO) - README**
+# 🌐 **Reimagine Truth Organization (RTO) 
 
 ---
 
